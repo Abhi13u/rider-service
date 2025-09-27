@@ -1,0 +1,58 @@
+spring:
+  profiles:
+    active: local
+  datasource:
+    url: 'jdbc:postgresql://localhost:5432/rider-service'
+    username: rider-service
+    password: rider-service
+    hikari:
+      schema: public
+      connection-timeout: 2000
+      maximum-pool-size: 20
+  jpa:
+    open-in-view: false
+    show-sql: true
+    database: POSTGRESQL
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    hibernate:
+      ddl-auto: none
+  application:
+    name: rider_service
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 1MB
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  jackson:
+    mapper:
+      accept-case-insensitive-enums: true
+
+server:
+  port: 8080
+  max-http-header-size: 16384
+
+logging:
+  level:
+    root: info
+  file:
+    name: ./riderservicelogs/riderservice.log
+
+rider-service:
+  contact:
+    title: rider Service API
+    description: Documentation for Rider Service APIs
+    url: https://innocito.com/
+    team: Innocito Team
+    email:
+    license: Apache 2.0 License
+    terms: Terms of Service
+    version: 1.0.0
+  memoryCache:
+    name: rider_service_memory_cache
+    permitNullValues: false

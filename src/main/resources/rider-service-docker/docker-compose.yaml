@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  rider-service-database:
+    container_name: rider-service-database
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: rider-service
+      POSTGRES_USER: rider-service
+      POSTGRES_PASSWORD: rider-service
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - rider-service-network
+
+  rider-service-adminer-extension:
+    container_name: rider-service-adminer-extension
+    image: adminer:4.8.1-standalone
+    ports:
+      - "8071:8080"
+    depends_on:
+      rider-service-database:
+        condition: service_healthy
+    networks:
+      - rider-service-network
+
+networks:
+  rider-service-network:
+    driver: bridge
