@@ -30,7 +30,7 @@ public class RiderServiceImpl implements RiderService {
 
   @Override
   public RiderDTO registerRider(RiderDTO riderDTO) {
-    if(ObjectUtils.isNotEmpty(riderRepository.findByEmail(riderDTO.getEmail()))){
+    if (ObjectUtils.isNotEmpty(riderRepository.findByEmail(riderDTO.getEmail()))) {
       throw new EntityExistsException(Rider.class.getSimpleName(), String.format(
         "with email: " + riderDTO.getEmail(), ErrorMessages.ALREADY_EXISTS));
     }
